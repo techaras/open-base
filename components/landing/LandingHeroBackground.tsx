@@ -18,7 +18,7 @@ export function LandingHeroBackground({ children, variant }: LandingHeroBackgrou
   const colors = gradients[variant];
 
   return (
-    <div className="min-h-screen w-full bg-white relative">
+    <div className="w-full bg-white relative">
       {/* Dual Gradient Overlay (Bottom) Background */}
       <div
         className="absolute inset-0 z-0"
