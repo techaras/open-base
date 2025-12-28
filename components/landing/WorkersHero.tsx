@@ -1,10 +1,15 @@
 import { SegmentedControl } from "@/components/SegmentedControl";
 
 export function WorkersHero() {
+  const options = [
+    { id: "workers", label: "For workers", href: "/workers" },
+    { id: "companies", label: "For companies", href: "/companies" },
+  ];
+
   return (
     <section className="py-24">
       <div className="max-w-4xl mx-auto text-center flex flex-col items-center gap-8">
-        <SegmentedControl currentPage="workers" />
+        <SegmentedControl options={options} activeId="workers" />
         <h1 className="text-6xl font-bold">
           Earn $20/hour recording everyday tasks on video
         </h1>
