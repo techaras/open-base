@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export function SegmentedControl({ currentPage }: { currentPage: "workers" | "companies" }) {
   return (
-    <div className="rounded-[8px] bg-gray-100 p-[2px] dark:bg-zinc-800">
+    <div className="rounded-xl bg-gray-100 p-0.5 dark:bg-zinc-800">
       <AnimatedBackground
         defaultValue={currentPage === "workers" ? "For workers" : "For companies"}
         className="rounded-lg bg-white dark:bg-zinc-700"
