@@ -6,12 +6,12 @@ interface LandingHeroBackgroundProps {
 export function LandingHeroBackground({ children, variant }: LandingHeroBackgroundProps) {
   const gradients = {
     workers: {
-      gradient1: "rgba(139,92,246,0.15)", // purple
-      gradient2: "rgba(59,130,246,0.15)", // blue
+      gradient1: "rgba(255,131,66,0.15)", // purple
+      gradient2: "rgba(254,89,17,0.15)", // blue
     },
     companies: {
-      gradient1: "rgba(16,185,129,0.15)", // emerald/green
-      gradient2: "rgba(14,165,233,0.15)", // sky blue
+      gradient1: "rgba(85,58,254,0.15)", // emerald/green
+      gradient2: "rgba(64,33,225,0.15)", // sky blue
     },
   };
 

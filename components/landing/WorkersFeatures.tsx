@@ -23,11 +23,11 @@ export function WorkersFeatures() {
 
           {/* Right small bento */}
           <div className="sm:col-span-4 min-h-50 sm:min-h-96">
-            <div className="relative overflow-hidden rounded-4xl h-full bg-black flex flex-col justify-between items-start p-8 sm:p-12">
+            <div className="relative overflow-hidden rounded-4xl h-full bg-linear-to-b from-[#FF8342] to-[#FE5911] flex flex-col justify-between items-start p-8 sm:p-12">
               <h3 className="text-white text-2xl sm:text-3xl font-medium mb-6">
                 Ready to start?
               </h3>
-              <button className="px-15 py-2 rounded-full border border-[#9d9d9d] text-white text-base font-medium hover:bg-white hover:text-black transition-colors">
+              <button className="px-15 py-2 rounded-full border border-white text-white text-base font-medium hover:bg-white hover:text-black transition-colors">
                 Apply today
               </button>
             </div>
