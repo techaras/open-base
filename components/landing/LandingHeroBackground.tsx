@@ -6,12 +6,12 @@ interface LandingHeroBackgroundProps {
 export function LandingHeroBackground({ children, variant }: LandingHeroBackgroundProps) {
   const gradients = {
     workers: {
-      gradient1: "rgba(139,92,246,0.2)", // purple
-      gradient2: "rgba(59,130,246,0.2)", // blue
+      gradient1: "rgba(139,92,246,0.15)", // purple
+      gradient2: "rgba(59,130,246,0.15)", // blue
     },
     companies: {
-      gradient1: "rgba(16,185,129,0.2)", // emerald/green
-      gradient2: "rgba(14,165,233,0.2)", // sky blue
+      gradient1: "rgba(16,185,129,0.15)", // emerald/green
+      gradient2: "rgba(14,165,233,0.15)", // sky blue
     },
   };
 
@@ -26,14 +26,14 @@ export function LandingHeroBackground({ children, variant }: LandingHeroBackgrou
           backgroundImage: `
             linear-gradient(to right, rgba(229,231,235,0.8) 1px, transparent 1px),
             linear-gradient(to bottom, rgba(229,231,235,0.8) 1px, transparent 1px),
-            radial-gradient(circle 500px at 20% 100%, ${colors.gradient1}, transparent),
-            radial-gradient(circle 500px at 100% 80%, ${colors.gradient2}, transparent)
+            radial-gradient(circle 500px at 20% 30%, ${colors.gradient1}, transparent),
+            radial-gradient(circle 500px at 75% 70%, ${colors.gradient2}, transparent)
           `,
           backgroundSize: "72px 72px, 72px 72px, 100% 100%, 100% 100%",
           WebkitMaskImage:
-            "radial-gradient(ellipse 90% 80% at 50% 100%, #000 80%, transparent 100%)",
+            "radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 70%)",
           maskImage:
-            "radial-gradient(ellipse 90% 80% at 50% 100%, #000 80%, transparent 100%)",
+            "radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 70%)",
         }}
       />
       <div className="relative z-10">

@@ -15,7 +15,7 @@ export function WorkersFeatures() {
   ];
 
   return (
-    <section className="py-16 border-t">
+    <section className="py-16">
       <div className="max-w-7xl mx-auto grid grid-cols-4 gap-8">
         {features.map((feature, index) => (
           <div key={index} className="text-left">
