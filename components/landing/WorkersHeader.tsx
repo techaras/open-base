@@ -2,6 +2,7 @@
 
 import { BaseHeader } from "@/components/BaseHeader";
 import { Button } from "@/components/ui/button";
+import { ShineButton } from "@/components/ui/shine-button";
 import { motion } from "motion/react";
 
 export function WorkersHeader() {
@@ -13,7 +14,7 @@ export function WorkersHeader() {
     >
       <BaseHeader logoHref="/workers">
         <Button variant="ghost">Apply</Button>
-        <Button>Log In</Button>
+        <ShineButton>Log In</ShineButton>
       </BaseHeader>
     </motion.div>
   );

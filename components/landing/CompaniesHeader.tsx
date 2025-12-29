@@ -1,7 +1,7 @@
 "use client";
 
 import { BaseHeader } from "@/components/BaseHeader";
-import { Button } from "@/components/ui/button";
+import { ShineButton } from "@/components/ui/shine-button";
 import { motion } from "motion/react";
 
 export function CompaniesHeader() {
@@ -12,7 +12,7 @@ export function CompaniesHeader() {
       transition={{ duration: 0.25, delay: 0 }}
     >
       <BaseHeader logoHref="/companies">
-        <Button>Request Data</Button>
+        <ShineButton>Request Data</ShineButton>
       </BaseHeader>
     </motion.div>
   );
