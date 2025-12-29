@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { GlowEffect } from "@/components/ui/glow-effect";
 
 export default function WorkersPage() {
   return (
@@ -21,14 +22,21 @@ export default function WorkersPage() {
       >
         Use your device to record yourself doing household activities. Get paid weekly. No experience required.
       </motion.p>
-      <motion.button
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.25, delay: 0.4 }}
-        className="bg-black text-white px-24 py-4 rounded-full text-lg"
+        className="relative"
       >
-        Apply Now
-      </motion.button>
+        <GlowEffect
+          colors={['#FF8342', '#FE5911']}
+          mode="breathe"
+          blur="soft"
+        />
+        <button className="relative bg-black text-white px-24 py-4 rounded-full text-lg">
+          Apply Now
+        </button>
+      </motion.div>
     </>
   );
 }

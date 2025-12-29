@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { GlowEffect } from "@/components/ui/glow-effect";
 
 export default function CompaniesPage() {
   return (
@@ -21,14 +22,21 @@ export default function CompaniesPage() {
       >
         Access a global network of video data collectors. Scale from 100 to 10,000+ hours without hiring internally.
       </motion.p>
-      <motion.button
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.25, delay: 0.4 }}
-        className="bg-black text-white px-24 py-4 rounded-full text-lg"
+        className="relative"
       >
-        Request Data
-      </motion.button>
+        <GlowEffect
+          colors={['#553AFE', '#4021E1']}
+          mode="breathe"
+          blur="soft"
+        />
+        <button className="relative bg-black text-white px-24 py-4 rounded-full text-lg">
+          Request Data
+        </button>
+      </motion.div>
     </>
   );
 }
