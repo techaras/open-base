@@ -35,7 +35,7 @@ export default function LandingLayout({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.25, delay: 0.1 }}
             >
-              <SegmentedControl options={options} activeId={activeId} />
+              <SegmentedControl options={options} activeId={activeId} variant={variant} />
             </motion.div>
             {children}
           </div>

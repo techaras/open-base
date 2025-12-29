@@ -13,13 +13,30 @@ interface SegmentedControlOption {
 interface SegmentedControlProps {
   options: SegmentedControlOption[];
   activeId: string;
+  variant?: "workers" | "companies";
 }
 
-export function SegmentedControl({ options, activeId }: SegmentedControlProps) {
+export function SegmentedControl({ options, activeId, variant = "workers" }: SegmentedControlProps) {
   const uniqueId = useId();
   
+  const styles = {
+    workers: {
+      background: "#FFE8D4",
+      activeGradient: "linear-gradient(to right, #FE5911, #FF8342)",
+    },
+    companies: {
+      background: "#EBEFFF",
+      activeGradient: "linear-gradient(to right, #553AFE, #4021E1)",
+    },
+  };
+
+  const currentStyle = styles[variant];
+  
   return (
-    <div className="rounded-full bg-zinc-200 p-0.5 dark:bg-zinc-800">
+    <div 
+      className="rounded-full p-0.5"
+      style={{ backgroundColor: currentStyle.background }}
+    >
       <div className="relative flex">
         {options.map((option) => {
           const isActive = option.id === activeId;
@@ -42,7 +59,8 @@ export function SegmentedControl({ options, activeId }: SegmentedControlProps) {
                   {isActive && (
                     <motion.div
                       layoutId={`segmented-control-${uniqueId}`}
-                      className="absolute inset-0 rounded-full bg-black dark:bg-zinc-700"
+                      className="absolute inset-0 rounded-full"
+                      style={{ background: currentStyle.activeGradient }}
                       transition={{
                         ease: "easeInOut",
                         duration: 0.2,
