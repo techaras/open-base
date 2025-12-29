@@ -1,6 +1,15 @@
+"use client";
+
+import { motion } from "motion/react";
+
 export function WorkersFeatures() {
   return (
-    <section className="pt-8 pb-28">
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25, delay: 0.5 }}
+      className="pt-8 pb-28"
+    >
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-12 gap-4">
           {/* Left large bento */}
@@ -25,6 +34,6 @@ export function WorkersFeatures() {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
