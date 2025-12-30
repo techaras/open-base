@@ -14,43 +14,35 @@ export function HardwareCheckbox({
       <label className="block text-base mb-3" style={{ color: "#f2f2f2" }}>
         What hardware is required to collect the data?
       </label>
-      <div className="space-y-2">
+      <div className="flex flex-wrap gap-3">
         {HARDWARE_OPTIONS.map((option) => {
           const isChecked = selectedHardware.includes(option);
           return (
-            <label
+            <button
               key={option}
-              className="flex items-center gap-3 cursor-pointer group"
+              type="button"
               onClick={() => onChange(option)}
+              className={`px-4 py-2 rounded-full flex items-center gap-2 transition-all ${
+                isChecked
+                  ? "bg-[#6e71ff]/20 border-[#6e71ff] border text-white"
+                  : "bg-transparent text-white border border-[#4a4a4a] hover:border-[#6e71ff]"
+              }`}
             >
-              <div
-                className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
-                  isChecked
-                    ? "bg-[#6e71ff] border-[#6e71ff]"
-                    : "bg-transparent border-[#f2f2f2]"
-                }`}
-              >
-                {isChecked && (
-                  <svg
-                    className="w-3 h-3 text-white"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="3"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path d="M5 13l4 4L19 7" />
-                  </svg>
-                )}
-              </div>
-              <span
-                className="text-base group-hover:text-white transition-colors"
-                style={{ color: "#f2f2f2" }}
-              >
-                {option}
-              </span>
-            </label>
+              <span className="text-base">{option}</span>
+              {isChecked && (
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="3"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M5 13l4 4L19 7" />
+                </svg>
+              )}
+            </button>
           );
         })}
       </div>
