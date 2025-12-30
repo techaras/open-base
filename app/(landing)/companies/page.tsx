@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { GlowEffect } from "@/components/ui/glow-effect";
+import Link from "next/link";
 
 export default function CompaniesPage() {
   return (
@@ -33,9 +34,11 @@ export default function CompaniesPage() {
           mode="breathe"
           blur="soft"
         />
-        <button className="relative bg-black text-white px-24 py-4 rounded-full text-lg">
-          Request Data
-        </button>
+        <Link href="/request-data">
+          <button className="relative bg-black text-white px-24 py-4 rounded-full text-lg">
+            Request Data
+          </button>
+        </Link>
       </motion.div>
     </>
   );
