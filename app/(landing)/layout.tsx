@@ -7,6 +7,7 @@ import { CompaniesHeader } from "@/components/landing/CompaniesHeader";
 import { WorkersFeatures } from "@/components/landing/WorkersFeatures";
 import { CompaniesFeatures } from "@/components/landing/CompaniesFeatures";
 import { SegmentedControl } from "@/components/SegmentedControl";
+import { Footer } from "@/components/Footer";
 import { motion } from "motion/react";
 
 export default function LandingLayout({
@@ -44,6 +45,7 @@ export default function LandingLayout({
       <main>
         {isWorkers ? <WorkersFeatures /> : <CompaniesFeatures />}
       </main>
+      <Footer />
     </>
   );
 }
