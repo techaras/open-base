@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import Link from "next/link";
 
 export function WorkersFeatures() {
   return (
@@ -30,9 +31,11 @@ export function WorkersFeatures() {
               <h3 className="text-white text-2xl sm:text-3xl font-medium mb-6">
                 Ready to start?
               </h3>
-              <button className="px-15 py-2 rounded-full border border-white text-white text-base font-medium hover:bg-white hover:text-black transition-colors self-end lg:self-start">
-                Apply today
-              </button>
+              <Link href="/apply">
+                <button className="px-15 py-2 rounded-full border border-white text-white text-base font-medium hover:bg-white hover:text-black transition-colors self-end lg:self-start">
+                  Apply today
+                </button>
+              </Link>
             </div>
           </div>
         </div>

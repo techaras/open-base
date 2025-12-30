@@ -9,7 +9,9 @@ import Link from "next/link";
 export function WorkersHeader() {
   return (
     <BaseHeader logoHref="/workers">
-      <Button variant="ghost">Apply</Button>
+      <Link href="/apply">
+        <Button variant="ghost">Apply</Button>
+      </Link>
       <SignedOut>
         <SignInButton mode="modal">
           <ShineButton>Log In</ShineButton>
