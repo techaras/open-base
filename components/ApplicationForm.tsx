@@ -31,7 +31,7 @@ export function ApplicationForm() {
       style={{ backgroundColor: "#111111" }}
     >
       <h1
-        className="text-4xl md:text-5xl font-bold mb-8"
+        className="text-2xl md:text-5xl font-bold mb-8"
         style={{ color: "#ffffff" }}
       >
         Teach robots to be human

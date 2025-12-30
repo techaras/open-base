@@ -1,13 +1,20 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { BasicInformationSection } from "./request-data/BasicInformationSection";
+import { DataNeedsSection } from "./request-data/DataNeedsSection";
+import { RequestDataFormData } from "./request-data/types";
 
 export function RequestDataForm() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<RequestDataFormData>({
     fullName: "",
     email: "",
-    country: "",
-    equipment: "",
+    company: "",
+    dataType: "",
+    dataAmount: "",
+    timeline: "",
+    hardware: [],
+    otherHardware: "",
   });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -25,113 +32,39 @@ export function RequestDataForm() {
     });
   };
 
+  const handleHardwareChange = (hardware: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      hardware: prev.hardware.includes(hardware)
+        ? prev.hardware.filter((h) => h !== hardware)
+        : [...prev.hardware, hardware],
+    }));
+  };
+
   return (
     <div
       className="w-full max-w-2xl rounded-4xl p-8 md:p-12"
       style={{ backgroundColor: "#111111" }}
     >
       <h1
-        className="text-4xl md:text-5xl font-bold mb-8"
+        className="text-2xl md:text-3xl font-bold mb-2"
         style={{ color: "#ffffff" }}
       >
-        Teach robots to be human
+        Need more data to train your robots?
       </h1>
+      <p className="text-base mb-8" style={{ color: "#b7b7b7" }}>
+        Please tell us about the data you are looking for, in as much detail as
+        possible.
+      </p>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Full Name */}
-        <div>
-          <label
-            htmlFor="fullName"
-            className="block text-base mb-2"
-            style={{ color: "#f2f2f2" }}
-          >
-            Your full name
-          </label>
-          <input
-            type="text"
-            id="fullName"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleChange}
-            placeholder="Jon Doe"
-            required
-            className="w-full px-4 py-3 rounded-lg text-white text-base outline-none focus:ring-2 focus:ring-[#6e71ff]"
-            style={{
-              backgroundColor: "#363636",
-            }}
-          />
-        </div>
-
-        {/* Email */}
-        <div>
-          <label
-            htmlFor="email"
-            className="block text-base mb-2"
-            style={{ color: "#f2f2f2" }}
-          >
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="name@email.com"
-            required
-            className="w-full px-4 py-3 rounded-lg text-white text-base outline-none focus:ring-2 focus:ring-[#6e71ff]"
-            style={{
-              backgroundColor: "#363636",
-            }}
-          />
-        </div>
-
-        {/* Country */}
-        <div>
-          <label
-            htmlFor="country"
-            className="block text-base mb-2"
-            style={{ color: "#f2f2f2" }}
-          >
-            Country
-          </label>
-          <input
-            type="text"
-            id="country"
-            name="country"
-            value={formData.country}
-            onChange={handleChange}
-            placeholder="USA"
-            required
-            className="w-full px-4 py-3 rounded-lg text-white text-base outline-none focus:ring-2 focus:ring-[#6e71ff]"
-            style={{
-              backgroundColor: "#363636",
-            }}
-          />
-        </div>
-
-        {/* Equipment */}
-        <div>
-          <label
-            htmlFor="equipment"
-            className="block text-base mb-2"
-            style={{ color: "#f2f2f2" }}
-          >
-            What equipment do you have access to? (Optional)
-          </label>
-          <textarea
-            id="equipment"
-            name="equipment"
-            value={formData.equipment}
-            onChange={handleChange}
-            placeholder="Smartphone / GoPro / VR headset / Other"
-            rows={4}
-            className="w-full px-4 py-3 rounded-lg text-white text-base outline-none focus:ring-2 focus:ring-[#6e71ff] resize-none"
-            style={{
-              backgroundColor: "#363636",
-            }}
-          />
-        </div>
+      <form onSubmit={handleSubmit} className="space-y-8">
+        <BasicInformationSection formData={formData} onChange={handleChange} />
+        
+        <DataNeedsSection
+          formData={formData}
+          onChange={handleChange}
+          onHardwareChange={handleHardwareChange}
+        />
 
         {/* Submit Button */}
         <button
@@ -144,13 +77,6 @@ export function RequestDataForm() {
           Apply Now
         </button>
       </form>
-
-      <style jsx>{`
-        input::placeholder,
-        textarea::placeholder {
-          color: #b7b7b7;
-        }
-      `}</style>
     </div>
   );
 }
