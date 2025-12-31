@@ -1,9 +1,23 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 const isProtectedRoute = createRouteMatcher(["/server", "/dashboard"]);
+const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
 
 export default clerkMiddleware(async (auth, req) => {
-  if (isProtectedRoute(req)) await auth.protect();
+  const { sessionClaims } = await auth();
+  const role = sessionClaims?.metadata?.role;
+
+  // Protect admin routes - only admins can access
+  if (isAdminRoute(req) && role !== "admin") {
+    const url = new URL("/dashboard", req.url);
+    return NextResponse.redirect(url);
+  }
+
+  // Protect general authenticated routes
+  if (isProtectedRoute(req)) {
+    await auth.protect();
+  }
 });
 
 export const config = {
