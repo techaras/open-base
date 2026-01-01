@@ -10,73 +10,23 @@ import {
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import {
-  CheckSquare,
-  CreditCard,
-  ListTodo,
-  Settings,
-  UserCircle,
-} from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useMemo } from "react";
 import { Logo } from "./logo";
-import type { Route } from "./nav-main";
 import DashboardNavigation from "./nav-main";
 import { UserInfo } from "./user-info";
+import { getRoutes } from "@/config/routes";
 
 export function DashboardSidebar() {
   const { state } = useSidebar();
   const isCollapsed = state === "collapsed";
   const pathname = usePathname();
 
-  // Detect which section we're in
-  const isAdminSection = pathname.startsWith("/admin");
-
-  // Dashboard routes (for regular users)
-  const dashboardRoutes: Route[] = [
-    {
-      id: "my-tasks",
-      title: "My Tasks",
-      icon: <CheckSquare className="size-4" />,
-      link: "/dashboard/my-tasks",
-    },
-    {
-      id: "available-tasks",
-      title: "Available Tasks",
-      icon: <ListTodo className="size-4" />,
-      link: "/dashboard/available-tasks",
-    },
-    {
-      id: "settings",
-      title: "Settings",
-      icon: <Settings className="size-4" />,
-      link: "/dashboard/settings",
-    },
-  ];
-
-  // Admin routes (for admin users)
-  const adminRoutes: Route[] = [
-    {
-      id: "profiles",
-      title: "Profiles",
-      icon: <UserCircle className="size-4" />,
-      link: "/admin/profiles",
-    },
-    {
-      id: "tasks",
-      title: "Tasks",
-      icon: <ListTodo className="size-4" />,
-      link: "/admin/tasks",
-    },
-    {
-      id: "payments",
-      title: "Payments",
-      icon: <CreditCard className="size-4" />,
-      link: "/admin/payments",
-    },
-  ];
-
-  // Select which routes to show based on current section
-  const routes = isAdminSection ? adminRoutes : dashboardRoutes;
+  // Detect which section we're in and memoize the routes
+  const routes = useMemo(() => {
+    const isAdminSection = pathname.startsWith("/admin");
+    return getRoutes(isAdminSection);
+  }, [pathname]);
 
   return (
     <Sidebar variant="floating" collapsible="icon">
