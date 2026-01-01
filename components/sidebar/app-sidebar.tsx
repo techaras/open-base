@@ -29,8 +29,7 @@ import {
 import { Logo } from "./logo";
 import type { Route } from "./nav-main";
 import DashboardNavigation from "./nav-main";
-import { NotificationsPopover } from "./nav-notifications";
-import { TeamSwitcher } from "./team-switcher";
+import { UserInfo } from "./user-info";
 
 const dashboardRoutes: Route[] = [
   {
@@ -146,12 +145,6 @@ const dashboardRoutes: Route[] = [
   },
 ];
 
-const teams = [
-  { id: "1", name: "Alpha Inc.", logo: Logo, plan: "Free" },
-  { id: "2", name: "Beta Corp.", logo: Logo, plan: "Free" },
-  { id: "3", name: "Gamma Tech", logo: Logo, plan: "Free" },
-];
-
 export function DashboardSidebar() {
   const { state } = useSidebar();
   const isCollapsed = state === "collapsed";
@@ -185,15 +178,14 @@ export function DashboardSidebar() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
         >
-          <NotificationsPopover />
-          <SidebarTrigger />
+           <SidebarTrigger />
         </motion.div>
       </SidebarHeader>
       <SidebarContent className="gap-4 px-2 py-4">
         <DashboardNavigation routes={dashboardRoutes} />
       </SidebarContent>
       <SidebarFooter className="px-2">
-        <TeamSwitcher teams={teams} />
+        <UserInfo />
       </SidebarFooter>
     </Sidebar>
   );
