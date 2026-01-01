@@ -8,10 +8,10 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <SidebarProvider>
+    <SidebarProvider className="bg-[#F3F2F2]">
       <DashboardSidebar />
       <SidebarInset>
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 bg-[#F3F2F2]">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );

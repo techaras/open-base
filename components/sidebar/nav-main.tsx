@@ -38,7 +38,7 @@ const NavigationItem = memo(({ route, isCollapsed }: { route: Route; isCollapsed
           href={route.link}
           prefetch={true}
           className={cn(
-            "flex items-center rounded-lg px-2 transition-colors text-muted-foreground hover:bg-sidebar-muted hover:text-foreground",
+            "flex items-center rounded-lg px-2 transition-colors",
             isCollapsed && "justify-center"
           )}
         >
