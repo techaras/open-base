@@ -11,143 +11,72 @@ import {
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import {
-  Activity,
-  DollarSign,
-  Home,
-  Infinity,
-  LinkIcon,
-  Package2,
-  Percent,
-  PieChart,
+  CheckSquare,
+  CreditCard,
+  ListTodo,
   Settings,
-  ShoppingBag,
-  Sparkles,
-  Store,
-  TrendingUp,
-  Users,
+  UserCircle,
 } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { Logo } from "./logo";
 import type { Route } from "./nav-main";
 import DashboardNavigation from "./nav-main";
 import { UserInfo } from "./user-info";
 
-const dashboardRoutes: Route[] = [
-  {
-    id: "home",
-    title: "Home",
-    icon: <Home className="size-4" />,
-    link: "#",
-  },
-  {
-    id: "products",
-    title: "Products",
-    icon: <Package2 className="size-4" />,
-    link: "#",
-    subs: [
-      {
-        title: "Catalogue",
-        link: "#",
-        icon: <Package2 className="size-4" />,
-      },
-      {
-        title: "Checkout Links",
-        link: "#",
-        icon: <LinkIcon className="size-4" />,
-      },
-      {
-        title: "Discounts",
-        link: "#",
-        icon: <Percent className="size-4" />,
-      },
-    ],
-  },
-  {
-    id: "usage-billing",
-    title: "Usage Billing",
-    icon: <PieChart className="size-4" />,
-    link: "#",
-    subs: [
-      {
-        title: "Meters",
-        link: "#",
-        icon: <PieChart className="size-4" />,
-      },
-      {
-        title: "Events",
-        link: "#",
-        icon: <Activity className="size-4" />,
-      },
-    ],
-  },
-  {
-    id: "benefits",
-    title: "Benefits",
-    icon: <Sparkles className="size-4" />,
-    link: "#",
-  },
-  {
-    id: "customers",
-    title: "Customers",
-    icon: <Users className="size-4" />,
-    link: "#",
-  },
-  {
-    id: "sales",
-    title: "Sales",
-    icon: <ShoppingBag className="size-4" />,
-    link: "#",
-    subs: [
-      {
-        title: "Orders",
-        link: "#",
-        icon: <ShoppingBag className="size-4" />,
-      },
-      {
-        title: "Subscriptions",
-        link: "#",
-        icon: <Infinity className="size-4" />,
-      },
-    ],
-  },
-  {
-    id: "storefront",
-    title: "Storefront",
-    icon: <Store className="size-4" />,
-    link: "#",
-  },
-  {
-    id: "analytics",
-    title: "Analytics",
-    icon: <TrendingUp className="size-4" />,
-    link: "#",
-  },
-  {
-    id: "finance",
-    title: "Finance",
-    icon: <DollarSign className="size-4" />,
-    link: "#",
-    subs: [
-      { title: "Incoming", link: "#" },
-      { title: "Outgoing", link: "#" },
-      { title: "Payout Account", link: "#" },
-    ],
-  },
-  {
-    id: "settings",
-    title: "Settings",
-    icon: <Settings className="size-4" />,
-    link: "#",
-    subs: [
-      { title: "General", link: "#" },
-      { title: "Webhooks", link: "#" },
-      { title: "Custom Fields", link: "#" },
-    ],
-  },
-];
-
 export function DashboardSidebar() {
   const { state } = useSidebar();
   const isCollapsed = state === "collapsed";
+  const pathname = usePathname();
+
+  // Detect which section we're in
+  const isAdminSection = pathname.startsWith("/admin");
+
+  // Dashboard routes (for regular users)
+  const dashboardRoutes: Route[] = [
+    {
+      id: "my-tasks",
+      title: "My Tasks",
+      icon: <CheckSquare className="size-4" />,
+      link: "/dashboard/my-tasks",
+    },
+    {
+      id: "available-tasks",
+      title: "Available Tasks",
+      icon: <ListTodo className="size-4" />,
+      link: "/dashboard/available-tasks",
+    },
+    {
+      id: "settings",
+      title: "Settings",
+      icon: <Settings className="size-4" />,
+      link: "/dashboard/settings",
+    },
+  ];
+
+  // Admin routes (for admin users)
+  const adminRoutes: Route[] = [
+    {
+      id: "profiles",
+      title: "Profiles",
+      icon: <UserCircle className="size-4" />,
+      link: "/admin/profiles",
+    },
+    {
+      id: "tasks",
+      title: "Tasks",
+      icon: <ListTodo className="size-4" />,
+      link: "/admin/tasks",
+    },
+    {
+      id: "payments",
+      title: "Payments",
+      icon: <CreditCard className="size-4" />,
+      link: "/admin/payments",
+    },
+  ];
+
+  // Select which routes to show based on current section
+  const routes = isAdminSection ? adminRoutes : dashboardRoutes;
 
   return (
     <Sidebar variant="floating" collapsible="icon">
@@ -163,7 +92,7 @@ export function DashboardSidebar() {
           <Logo className="h-8 w-8" />
           {!isCollapsed && (
             <span className="font-semibold text-black dark:text-white">
-              Acme
+              OpenBase
             </span>
           )}
         </a>
@@ -178,11 +107,11 @@ export function DashboardSidebar() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
         >
-           <SidebarTrigger />
+          <SidebarTrigger />
         </motion.div>
       </SidebarHeader>
       <SidebarContent className="gap-4 px-2 py-4">
-        <DashboardNavigation routes={dashboardRoutes} />
+        <DashboardNavigation routes={routes} />
       </SidebarContent>
       <SidebarFooter className="px-2">
         <UserInfo />
