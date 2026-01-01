@@ -1,45 +1,18 @@
 "use client";
 
-import { useState, FormEvent } from "react";
 import { BasicInformationSection } from "./request-data/BasicInformationSection";
 import { DataNeedsSection } from "./request-data/DataNeedsSection";
-import { RequestDataFormData } from "./request-data/types";
+import { useRequestDataForm } from "@/hooks/use-request-data-form";
 
 export function RequestDataForm() {
-  const [formData, setFormData] = useState<RequestDataFormData>({
-    fullName: "",
-    email: "",
-    company: "",
-    dataType: "",
-    dataAmount: "",
-    timeline: "",
-    hardware: [],
-    otherHardware: "",
-  });
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    // TODO: Add form submission logic
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleHardwareChange = (hardware: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      hardware: prev.hardware.includes(hardware)
-        ? prev.hardware.filter((h) => h !== hardware)
-        : [...prev.hardware, hardware],
-    }));
-  };
+  const {
+    formData,
+    result,
+    isLoading,
+    handleSubmit,
+    handleChange,
+    handleHardwareChange,
+  } = useRequestDataForm();
 
   return (
     <div
@@ -69,13 +42,26 @@ export function RequestDataForm() {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full py-4 rounded-full text-white text-lg font-medium transition-opacity hover:opacity-90"
+          disabled={isLoading}
+          className="w-full py-4 rounded-full text-white text-lg font-medium transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
           style={{
             background: "linear-gradient(to right, #6e71ff, #574dff)",
           }}
         >
-          Apply Now
+          {isLoading ? "Submitting..." : "Submit Request"}
         </button>
+
+        {/* Result Message */}
+        {result && (
+          <p
+            className="text-center text-base"
+            style={{
+              color: result.includes("Success") ? "#4ade80" : "#f87171",
+            }}
+          >
+            {result}
+          </p>
+        )}
       </form>
     </div>
   );
