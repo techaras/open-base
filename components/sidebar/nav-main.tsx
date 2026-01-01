@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { memo } from "react";
 import type React from "react";
 
@@ -30,10 +31,10 @@ interface DashboardNavigationProps {
 /**
  * Individual navigation item component - memoized to prevent unnecessary re-renders
  */
-const NavigationItem = memo(({ route, isCollapsed }: { route: Route; isCollapsed: boolean }) => {
+const NavigationItem = memo(({ route, isCollapsed, isActive }: { route: Route; isCollapsed: boolean; isActive: boolean }) => {
   return (
     <SidebarMenuItem key={route.id}>
-      <SidebarMenuButton tooltip={route.title} asChild>
+      <SidebarMenuButton tooltip={route.title} asChild isActive={isActive}>
         <Link
           href={route.link}
           prefetch={true}
@@ -62,11 +63,17 @@ NavigationItem.displayName = "NavigationItem";
 const DashboardNavigation = memo(({ routes }: DashboardNavigationProps) => {
   const { state } = useSidebar();
   const isCollapsed = state === "collapsed";
+  const pathname = usePathname();
 
   return (
     <SidebarMenu>
       {routes.map((route) => (
-        <NavigationItem key={route.id} route={route} isCollapsed={isCollapsed} />
+        <NavigationItem 
+          key={route.id} 
+          route={route} 
+          isCollapsed={isCollapsed}
+          isActive={pathname === route.link}
+        />
       ))}
     </SidebarMenu>
   );
